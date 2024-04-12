@@ -1,0 +1,84 @@
+[
+  {
+    "line": 1,
+    "elements": [
+      {
+        "start_timestamp": "2024-04-12T10:29:53.919Z",
+        "line": 3,
+        "name": "",
+        "description": "    To add a product to cart",
+        "id": ";",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 10313482300,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "open the chrome browser",
+            "match": {
+              "location": "StepDefinition.open_the_chrome_browser()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 3269561000,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "Enter the product name",
+            "match": {
+              "location": "StepDefinition.enter_the_product_name()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 300739500,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "Choose a product",
+            "match": {
+              "location": "StepDefinition.choose_a_product()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 43547000,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "switch to another page",
+            "match": {
+              "location": "StepDefinition.switch_to_another_page()"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 5760814900,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "Add a product to cart",
+            "match": {
+              "location": "StepDefinition.add_a_product_to_cart()"
+            },
+            "keyword": "Then "
+          }
+        ]
+      }
+    ],
+    "name": "",
+    "description": "  To validate add to cart function in flipkart",
+    "id": "",
+    "keyword": "Feature",
+    "uri": "file:/C:/Users/User/eclipse-workspace/cumcumberflipkart/src/test/resources/featurefile/flipkart.feature",
+    "tags": []
+  }
+]
