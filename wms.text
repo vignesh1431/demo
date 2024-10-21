@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>CalculatorTest</groupId>
+    <artifactId>CalculatorTest</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <dependencies>
+
+        <!-- Selenium 3.x -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>3.141.59</version>
+        </dependency>
+
+        <!-- Appium Java Client 5.x (compatible with Selenium 3.x) -->
+        <dependency>
+            <groupId>io.appium</groupId>
+            <artifactId>java-client</artifactId>
+            <version>7.6.0</version>
+        </dependency>
+
+        <!-- JUnit for testing -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Ensure Maven compiler is using Java 11 or the version you want -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>11</source> <!-- Make sure this matches your JDK version -->
+                    <target>11</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import io.appium.java_client.windows.WindowsDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
+public class wmstest {
+
+    private static WindowsDriver CalculatorSession = null;
+
+    @BeforeClass
+    public static void setup() {
+        try {
+            // Start the application programmatically  cd C:\Program Files (x86)\Windows Application Driver
+            //WinAppDriver.exe  C:\Program Files (x86)\Windows Kits\10\bin\<version>\x64\inspect.exe
+            String appPath = "C:\\Users\\User\\Downloads\\WinAppDriver-master\\WinAppDriver-master\\Samples\\Java\\CalculatorTest\\src\\test\\java\\wmsapp_test.exe";
+            Process appProcess = Runtime.getRuntime().exec(appPath);
+
+            // Wait for a while to let the application open
+            Thread.sleep(20000);  // Wait for 20 seconds, adjust the time if needed
+
+            // Inspect the window handle and attach using WinAppDriver
+            // Use the window handle to attach to the existing app.
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+           // capabilities.setCapability("appTopLevelWindow", "0x40362"); // Use the HWND in hex format
+            capabilities.setCapability("app", "Root");
+            capabilities.setCapability("platformName", "Windows");
+// Update with the window handle shown in UI Automation
+
+            // Attach to the application using WinAppDriver
+            CalculatorSession = new WindowsDriver(new URL("http://127.0.0.1:4723"), capabilities);
+
+            // Optional: Capture window handles and switch if necessary
+           // Set<String> windowHandles = CalculatorSession.getWindowHandles();
+            //for (String handle : windowHandles) {
+              //  CalculatorSession.switchTo().window(handle);
+                System.out.println("Switched to window handle: ");
+            //}
+
+            // Wait for main window to load
+           // WebDriverWait wait = new WebDriverWait(CalculatorSession, 60);
+            //wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("WMS App")));  // Replace with valid locator
+
+            System.out.println("Main window loaded successfully.");
+
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @AfterClass
+    public static void TearDown() {
+        if (CalculatorSession != null) {
+            CalculatorSession.quit();
+        }
+        CalculatorSession = null;
+    }
+
+    @Test
+    public void Addition() {
+        // Interact with the username input field by AutomationId
+        CalculatorSession.findElementByAccessibilityId("usernameUserInput").sendKeys("testuser");
+
+        // Assuming there's a password input field with a known locator
+        CalculatorSession.findElementByAccessibilityId("password").sendKeys("password");
+
+        // Click the LOGIN button (modify the locator based on the actual button)
+        CalculatorSession.findElement(By.name("LOGIN")).click();
+
+        // Add more assertions or interactions as needed
+        System.out.println("Login test completed.");
+        // Test case implementation
+    }
+}
+
